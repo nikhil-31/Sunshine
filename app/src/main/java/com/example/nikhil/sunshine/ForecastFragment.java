@@ -180,15 +180,13 @@ public class ForecastFragment extends Fragment {
         dayTime = new Time();
 
         String[] resultStrs = new String[numDays];
-
-            // Data is fetched in Celsius by default.
-                        // If user prefers to see in Fahrenheit, convert the values here.
-                                // We do this rather than fetching in Fahrenheit so that the user can
-                        // change this option without us having to re-fetch the data once
-                                                // we start storing the values in a database.
-                                                        SharedPreferences sharedPrefs =
-                                        PreferenceManager.getDefaultSharedPreferences(getActivity());
-                        String unitType = sharedPrefs.getString(
+        // Data is fetched in Celsius by default.
+        // If user prefers to see in Fahrenheit, convert the values here.
+        // We do this rather than fetching in Fahrenheit so that the user can
+        // change this option without us having to re-fetch the data once
+        // we start storing the values in a database.
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String unitType = sharedPrefs.getString(
                                         getString(R.string.pref_units_key),
                                         getString(R.string.pref_units_metric));
 
