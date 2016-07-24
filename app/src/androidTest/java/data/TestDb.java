@@ -5,12 +5,15 @@ package data;
  */
 
 
+        import android.content.ContentValues;
         import android.database.Cursor;
         import android.database.sqlite.SQLiteDatabase;
         import android.test.AndroidTestCase;
 
         import com.example.nikhil.sunshine.data.WeatherContract;
         import com.example.nikhil.sunshine.data.WeatherDbHelper;
+
+        import junit.framework.Assert;
 
         import java.util.HashSet;
 
@@ -107,20 +110,36 @@ public class TestDb extends AndroidTestCase {
     public void testLocationTable() {
         // First step: Get reference to writable database
 
+        WeatherDbHelper helper = new WeatherDbHelper(this.getContext());
+        SQLiteDatabase db = helper.getWritableDatabase();
         // Create ContentValues of what you want to insert
         // (you can use the createNorthPoleLocationValues if you wish)
-
+        ContentValues contentValues = TestUtilities.createNorthPoleLocationValues();
         // Insert ContentValues into database and get a row ID back
-
+        long id = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, contentValues);
+        assertTrue(id != -1);
         // Query the database and receive a Cursor back
 
+        Cursor cursor = db.query(WeatherContract.LocationEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
         // Move the cursor to a valid database row
-
+        assertTrue(" Error no records returned", cursor.moveToFirst());
         // Validate data in resulting Cursor with the original ContentValues
+        TestUtilities.validateCurrentRecord("Error location query validation failed", cursor, contentValues);
+
         // (you can use the validateCurrentRecord function in TestUtilities to validate the
         // query if you like)
-
+        assertFalse("Error: More than one record returned from location query",
+                cursor.moveToNext());
         // Finally, close the cursor and database
+
+        cursor.close();
+        db.close();
 
     }
 
@@ -140,21 +159,30 @@ public class TestDb extends AndroidTestCase {
 //         and our testLocationTable can only return void because it's a test.
 //
 //         First step: Get reference to writable database
+
+
 //
 //         Create ContentValues of what you want to insert
 //         (you can use the createWeatherValues TestUtilities function if you wish)
+
+
 //
 //         Insert ContentValues into database and get a row ID back
+
 //
-//         Query the database and receive a Cursor back
 //
 //         Move the cursor to a valid database row
-//
+
 //         Validate data in resulting Cursor with the original ContentValues
 //         (you can use the validateCurrentRecord function in TestUtilities to validate the
 //         query if you like)
-//
-//         Finally, close the cursor and database
+
+//   Finally, close the cursor and database
+
+
+
+
+
     }
 
 
