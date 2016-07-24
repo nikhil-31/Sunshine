@@ -18,7 +18,7 @@ package data;
         import java.util.HashSet;
 
 public class TestDb extends AndroidTestCase {
-
+    long id;
     public static final String LOG_TAG = TestDb.class.getSimpleName();
 
     // Since we want each test to start with a clean slate
@@ -116,7 +116,7 @@ public class TestDb extends AndroidTestCase {
         // (you can use the createNorthPoleLocationValues if you wish)
         ContentValues contentValues = TestUtilities.createNorthPoleLocationValues();
         // Insert ContentValues into database and get a row ID back
-        long id = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, contentValues);
+        id = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, contentValues);
         assertTrue(id != -1);
         // Query the database and receive a Cursor back
 
@@ -152,30 +152,46 @@ public class TestDb extends AndroidTestCase {
     public void testWeatherTable() {
 //         First insert the location, and then use the locationRowId to insert
 //         the weather. Make sure to cover as many failure cases as you can.
-//
+
 //         Instead of rewriting all of the code we've already written in testLocationTable
 //         we can move this code to insertLocation and then call insertLocation from both
 //         tests. Why move it? We need the code to return the ID of the inserted location
 //         and our testLocationTable can only return void because it's a test.
 //
 //         First step: Get reference to writable database
-
+        WeatherDbHelper helper = new WeatherDbHelper(this.getContext());
+        SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
 
 //
 //         Create ContentValues of what you want to insert
 //         (you can use the createWeatherValues TestUtilities function if you wish)
-
+        ContentValues contentValues = TestUtilities.createWeatherValues(id);
 
 //
 //         Insert ContentValues into database and get a row ID back
+        long weatherRowId = sqLiteDatabase.insert(WeatherContract.WeatherEntry.TABLE_NAME,null,contentValues);
 
 //
 //
 //         Move the cursor to a valid database row
+        Cursor weatherCursor = sqLiteDatabase.query(
+                WeatherContract.WeatherEntry.TABLE_NAME,  // Table to Query
+                null, // leaving "columns" null just returns all the columns.
+                null, // cols for "where" clause
+                null, // values for "where" clause
+                null, // columns to group by
+                null, // columns to filter by row groups
+                null  // sort order
+        );
 
 //         Validate data in resulting Cursor with the original ContentValues
+
+        TestUtilities.validateCurrentRecord("testInsertReadDb weatherEntry failed to validate",
+                weatherCursor, contentValues);
 //         (you can use the validateCurrentRecord function in TestUtilities to validate the
 //         query if you like)
+        weatherCursor.close();
+        sqLiteDatabase.close();
 
 //   Finally, close the cursor and database
 
