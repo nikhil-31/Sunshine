@@ -287,7 +287,7 @@ public class WeatherProvider extends ContentProvider {
         // the uri listeners (using the content resolver) if the rowsDeleted != 0 or the selection
         // is null.
         // Oh, and you should notify the listeners here.
-        if(noOfRowsDeleted != 0 || selection == null)
+        if(noOfRowsDeleted != 0 )
             getContext().getContentResolver().notifyChange(uri, null);
 
 
