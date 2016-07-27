@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import android.text.format.Time;
 import android.widget.Toast;
 
+import com.example.nikhil.sunshine.data.WeatherDbHelper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -107,6 +109,7 @@ public class ForecastFragment extends Fragment {
         super.onStart();
         updateWeather();
     }
+
 
 
 }
