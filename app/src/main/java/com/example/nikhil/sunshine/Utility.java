@@ -25,15 +25,16 @@ public class Utility {
                 context.getString(R.string.pref_units_metric))
                 .equals(context.getString(R.string.pref_units_metric));
     }
-
-    static String formatTemperature(double temperature, boolean isMetric) {
+    // We add context because we have to return the string from res and from the context we can get access to the
+    // String resource Id declared for the temperature which gives us the degree symbol.
+    static String formatTemperature(Context context, double temperature, boolean isMetric) {
         double temp;
         if ( !isMetric ) {
             temp = 9*temperature/5+32;
         } else {
             temp = temperature;
         }
-        return String.format("%.0f", temp);
+        return context.getString(R.string.format_temperature, temp);
     }
 
     static String formatDate(long dateInMilliseconds) {
