@@ -1,27 +1,24 @@
 package com.example.nikhil.sunshine;
 
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
-
-
-
-        import android.content.Intent;
-        import android.database.Cursor;
-        import android.os.Bundle;
-        import android.support.v4.app.Fragment;
-        import android.support.v4.app.LoaderManager.LoaderCallbacks;
-        import android.support.v4.content.CursorLoader;
-        import android.support.v4.content.Loader;
-        import android.support.v4.view.MenuItemCompat;
-        import android.support.v7.app.ActionBarActivity;
-        import android.support.v7.widget.ShareActionProvider;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.TextView;
 
 import com.example.nikhil.sunshine.data.WeatherContract;
 
@@ -34,7 +31,7 @@ public class Detail_activity extends ActionBarActivity {
         setContentView(R.layout.activity_detail);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DetailFragment())
+                    .add(R.id.weather_detail_container, new DetailFragment())
                     .commit();
         }
     }
@@ -111,18 +108,20 @@ public class Detail_activity extends ActionBarActivity {
             mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
             // If onLoadFinished happens before this, we can go ahead and set the share intent now.
-            if (mForecast != null) {
-                mShareActionProvider.setShareIntent(createShareForecastIntent());
-            }
+//            if (mForecast != null) {
+//                mShareActionProvider.setShareIntent(createShareForecastIntent());
+//            }
+
+
         }
 
-        private Intent createShareForecastIntent() {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, mForecast + FORECAST_SHARE_HASHTAG);
-            return shareIntent;
-        }
+//        private Intent createShareForecastIntent() {
+//            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+//            shareIntent.setType("text/plain");
+//            shareIntent.putExtra(Intent.EXTRA_TEXT, mForecast + FORECAST_SHARE_HASHTAG);
+//            return shareIntent;
+//        }
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
@@ -174,9 +173,9 @@ public class Detail_activity extends ActionBarActivity {
             detailTextView.setText(mForecast);
 
             // If onCreateOptionsMenu has already happened, we need to update the share intent now.
-            if (mShareActionProvider != null) {
-                mShareActionProvider.setShareIntent(createShareForecastIntent());
-            }
+//            if (mShareActionProvider != null) {
+//                mShareActionProvider.setShareIntent(createShareForecastIntent());
+//            }
         }
 
         @Override

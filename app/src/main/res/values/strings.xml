@@ -2,6 +2,8 @@
     <string name="app_name">Sunshine</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh" translatable="false">refresh</string>
+    <string name="action_share">Share</string>
+
     <string name="title_activity_detail_activity">Detail_activity</string>
     <string name="title_activity_settings">Settings</string>
 
