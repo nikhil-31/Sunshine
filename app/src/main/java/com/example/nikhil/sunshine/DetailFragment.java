@@ -111,7 +111,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the main; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.detail, menu);
+        //inflater.inflate(R.menu.detail, menu);
 
         // Retrieve the share main item
         MenuItem menuItem = menu.findItem(R.id.action_share);

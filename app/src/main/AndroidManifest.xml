@@ -31,6 +31,7 @@
         <provider
                     android:authorities="com.example.nikhil.sunshine.app"
                     android:name=".data.WeatherProvider" />
+        <service android:name=".service.SunshineService"/>
         <activity
                     android:name=".SettingsActivity"
                     android:label="@string/title_activity_settings"
@@ -40,6 +41,7 @@
                         android:name="android.support.PARENT_ACTIVITY"
                         android:value="com.example.nikhil.sunshine.MainActivity" />
                 </activity>
+
     </application>
 
 </manifest>
