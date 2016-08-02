@@ -35,10 +35,10 @@
                 android:value="MainActivity" />
         </activity>
         <provider
-                    android:authorities="com.example.nikhil.sunshine.app"
-                    android:name=".data.WeatherProvider"
-                    android:exported="false"
-                    android:syncable="true" />
+            android:authorities="@string/content_authority"
+            android:name=".data.WeatherProvider"
+            android:exported="false"
+            android:syncable="true" />
 
         <!-- SyncAdapter's dummy authentication service -->
         <service android:name=".sync.SunshineAuthenticatorService">
